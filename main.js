@@ -4,16 +4,18 @@ jsonFiles = [];
 var jsonFinal = [];
 fs.readdirSync(folderToReadPath).forEach(file => {
   console.log(file);
-  jsonFiles.push(file);
+  if (file != '.DS_Store') {
+    jsonFiles.push(file);
+  }
 });
 
 concatJson().then(async function(val) {
     console.log("done");
-    //console.log(val);
+    //console.log(JSON.stringify(val));
 
     
         try {
-          fs.writeFileSync(folderToReadPath + "/final.json", JSON.stringify(val), err => {
+          fs.writeFileSync("./final.json", JSON.stringify(val), err => {
             if (err) {
                 console.log('Error writing file', err)
             } else {
@@ -31,12 +33,20 @@ async function concatJson() {
     var arr = [];
     for (let loopVar = 0; loopVar < jsonFiles.length; loopVar++) {
         dat = fs.readFileSync(folderToReadPath + "/" + jsonFiles[loopVar]);
-        json = JSON.parse(dat);
+        try {
+            json = JSON.parse(dat);
+        } catch(e) {
+            //console.log(jsonFiles[loopVar]);
+            console.log(e);
+            continue;
+        }
         for (let key in json) {
-            console.log("set");
+            //console.log(key);
             set.add(key);
             arr.push(key);
-            jsonFinal[key] = json[key];
+            let newObj = {};
+            newObj[key] = json[key];
+            jsonFinal.push(newObj);
         }
     }
     return jsonFinal;
