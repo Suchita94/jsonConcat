@@ -2,7 +2,7 @@
   "name": "github-diff-store",
   "version": "1.0.0",
   "description": "Store Github Diff Templates",
-  "main": "nodeCrawler.js",
+  "main": "mainScript.js",
   "dependencies": {
     "bluebird": "^3.7.2",
     "cheerio": "^1.0.0-rc.3",
@@ -12,7 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node mainScript.js"
   },
   "author": "Suchita Mukherjee",
   "license": "ISC"
