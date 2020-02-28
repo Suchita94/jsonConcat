@@ -51,19 +51,6 @@ function parse(url, loopVar) {
     })
 }
 function formPrevLink(artifactDat, gitDat) {
-    // return new Promise(function(resolve, reject) {
-    //     for (let loopVar = 0; loopVar < artifactDat.length; loopVar++) {
-    //         for (let inLoop = 0; inLoop < gitDat.length; inLoop++) {
-    //             for (let gitKey in gitDat[inLoop]) {
-    //                 if (artifactDat[loopVar].diff_url == gitKey && !prevLink.includes(gitKey)) {
-    //                     prevLink.push(gitKey);
-    //                 }
-    //             }
-                
-    //         }
-    //     }
-    //     resolve();
-    // });
 
     return new Promise.map(artifactDat, function(artifact) {
         return new Promise.map(gitDat, function(git) {
@@ -77,15 +64,6 @@ function formPrevLink(artifactDat, gitDat) {
 }
 
 function getNewLinks(artifactDat, prevLink) {
-    // return new Promise(function(resolve, reject) {
-    //     for (let loopVar = 0; loopVar < artifactDat.length; loopVar++) {
-    //         console.log(loopVar);
-    //         if (!prevLink.includes(artifactDat[loopVar].diff_url)) {
-    //             parse(artifactDat[loopVar].diff_url, loopVar);
-    //         }
-    //     }
-    //     resolve();
-    // });
     return new Promise.map(artifactDat, function(artifact) {
         if (!prevLink.includes(artifact.diff_url)) {
             return parse(artifact.diff_url);
